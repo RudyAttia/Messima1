@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>radius</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <style>
+        body{
+            display: flex;
+            /* flex-wrap: wrap; */
+        }
+        body > div{
+            width: 500px;
+            margin: 20px;
+        }
+        canvas{
+            border: 1px black solid;
+        }
+        #volume{
+            border: 1px black solid;
+            width: 178px;
+            height: 30px;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <h5>Input radius and get volume of a sphere</h5>
+        <span>Radius:</span><br><input id="radius" type="text"><br>
+        <span>Volume:</span><br><div id="volume"></div><br>
+        <button onclick="CalculateVolume()">Calculate</button>
+        <button onclick="DrawAll()">Draw All</button>
+    </div>
+    <div>
+        <h5>Drawing On Canvas!</h5>
+        <canvas width="300px" height="300px" id="myCanvas"></canvas><br>
+        <button style="width: 302px" onclick="ClearCanvas()">Clear (and stop draw all)</button>
+
+    </div>
+
+    <script>
+
+        function CalculateVolume() {
+            var radius = parseFloat(document.getElementById("radius").value);
+            if (isNaN(radius)) {
+                document.getElementById("volume").innerText = "";
+                alert("IS NOT A NUMBER, ENTER NUMBER IN THE RADIUS");
+                return 0
+
+            }
+            if(radius>150 || radius<0){
+                document.getElementById("volume").innerText = "";
+                alert("THE RADIUS IS BIGER, ENTER RADIUS >0 AND < 150");
+                return 0
+            }
+            document.getElementById("volume").innerText = ((4 * (Math.PI) * (radius ** 3)) / 3).toFixed(4);
+            DrawCircle(radius);
+        }
+
+        var c = document.getElementById("myCanvas");
+        var ctx = c.getContext("2d");
+        var drawinterval;
+        var dac = 0;
+
+        function DrawCircle(radius) {
+            if(radius>150){
+                clearInterval(drawinterval);
+                dac = 0;
+            }
+            ctx.beginPath();
+            ctx.arc(150 , 150 , (radius) , 0 , 2*Math.PI);
+            ctx.stroke();
+        }
+
+        function ClearCanvas(){
+            ctx.clearRect(0,0,300,300);
+            clearInterval(drawinterval);
+            dac = 0;
+        }
+
+        
+        function DrawAllCircle(){
+            DrawCircle(dac)
+            dac++;
+        }
+
+        function DrawAll(){
+            drawinterval = setInterval(DrawAllCircle,100);
+        }
+        
+    </script>
+</body>
+
+</html>
