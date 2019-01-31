@@ -6,7 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>radius</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
+        crossorigin="anonymous">
     <style>
         body{
             display: flex;
@@ -31,7 +32,8 @@
     <div>
         <h5>Input radius and get volume of a sphere</h5>
         <span>Radius:</span><br><input id="radius" type="text"><br>
-        <span>Volume:</span><br><div id="volume"></div><br>
+        <span>Volume:</span><br>
+        <div id="volume"></div><br>
         <button onclick="CalculateVolume()">Calculate</button>
         <button onclick="DrawAll()">Draw All</button>
     </div>
@@ -52,7 +54,7 @@
                 return 0
 
             }
-            if(radius>150 || radius<0){
+            if (radius > 150 || radius < 0) {
                 document.getElementById("volume").innerText = "";
                 alert("THE RADIUS IS BIGER, ENTER RADIUS >0 AND < 150");
                 return 0
@@ -67,31 +69,31 @@
         var dac = 0;
 
         function DrawCircle(radius) {
-            if(radius>150){
+            if (radius > 150) {
                 clearInterval(drawinterval);
                 dac = 0;
             }
             ctx.beginPath();
-            ctx.arc(150 , 150 , (radius) , 0 , 2*Math.PI);
+            ctx.arc(150, 150, (radius), 0, 2 * Math.PI);
             ctx.stroke();
         }
 
-        function ClearCanvas(){
-            ctx.clearRect(0,0,300,300);
+        function ClearCanvas() {
+            ctx.clearRect(0, 0, 300, 300);
             clearInterval(drawinterval);
             dac = 0;
         }
 
-        
-        function DrawAllCircle(){
+
+        function DrawAllCircle() {
             DrawCircle(dac)
             dac++;
         }
 
-        function DrawAll(){
-            drawinterval = setInterval(DrawAllCircle,100);
+        function DrawAll() {
+            drawinterval = setInterval(DrawAllCircle, 100);
         }
-        
+
     </script>
 </body>
 
